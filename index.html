@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificador de Riesgo de Crédito Fuzzy</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f8ff; color: #333; }
+        .container { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h1 { text-align: center; color: #20b2aa; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input[type="number"] { width: calc(100% - 22px); padding: 10px; margin-bottom: 20px; border: 1px solid #cce7e7; border-radius: 4px; }
+        button { background-color: #20b2aa; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background-color: #1a9e96; }
+        #resultado { margin-top: 30px; padding: 15px; border: 1px dashed #20b2aa; border-radius: 5px; background-color: #e0ffff; text-align: center; font-size: 1.2em; }
+        #recomendacion { margin-top: 20px; padding: 15px; border: 1px solid; border-radius: 5px; color: #333; font-size: 1em; text-align: left; }
+        #recomendacion.high-risk { border-color: #f44336; background-color: #ffebee; }
+        #recomendacion.medium-risk { border-color: #ff9800; background-color: #fff3e0; }
+        #recomendacion.low-risk { border-color: #4CAF50; background-color: #e8f5e9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clasificador de Riesgo de Crédito</h1>
+
+        <div>
+            <label for="ingresos">Ingresos Mensuales ($):</label>
+            <input type="number" id="ingresos" min="500" max="10000" step="100" value="3000">
+        </div>
+
+        <div>
+            <label for="historial_pagos">Historial de Pagos (1-10, 10=Excelente):</label>
+            <input type="number" id="historial_pagos" min="1" max="10" step="1" value="7">
+        </div>
+
+        <div>
+            <label for="deuda_relativa">Deuda Relativa (0-10, 10=Muy Alta):</label>
+            <input type="number" id="deuda_relativa" min="0" max="10" step="0.5" value="5">
+        </div>
+
+        <button onclick="clasificarRiesgo()">Clasificar Riesgo</button>
+
+        <div id="resultado">
+            Resultado del diagnóstico: <span style="font-weight: bold;">Esperando datos...</span>
+        </div>
+
+        <div id="recomendacion">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

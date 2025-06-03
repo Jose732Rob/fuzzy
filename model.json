@@ -1,0 +1,334 @@
+{
+  "entradas": {
+    "ingresos": {
+      "rango": [
+        500,
+        10000
+      ],
+      "funciones_membresia": {
+        "bajos": [
+          500,
+          500,
+          3000
+        ],
+        "medios": [
+          2000,
+          4500,
+          7000
+        ],
+        "altos": [
+          6000,
+          10000,
+          10000
+        ]
+      }
+    },
+    "historial_pagos": {
+      "rango": [
+        0,
+        10
+      ],
+      "funciones_membresia": {
+        "malo": [
+          0,
+          0,
+          4
+        ],
+        "regular": [
+          3,
+          5,
+          8
+        ],
+        "bueno": [
+          7,
+          10,
+          10
+        ]
+      }
+    },
+    "deuda_relativa": {
+      "rango": [
+        0.0,
+        10.5
+      ],
+      "funciones_membresia": {
+        "baja": [
+          0,
+          0,
+          3
+        ],
+        "media": [
+          2,
+          5,
+          8
+        ],
+        "alta": [
+          7,
+          10,
+          10
+        ]
+      }
+    }
+  },
+  "salidas": {
+    "riesgo_bajo": {
+      "rango": [
+        0,
+        100
+      ],
+      "funciones_membresia": {
+        "low": [
+          0,
+          0,
+          50
+        ],
+        "medium": [
+          30,
+          50,
+          70
+        ],
+        "high": [
+          60,
+          100,
+          100
+        ]
+      }
+    },
+    "riesgo_medio": {
+      "rango": [
+        0,
+        100
+      ],
+      "funciones_membresia": {
+        "low": [
+          0,
+          0,
+          50
+        ],
+        "medium": [
+          30,
+          50,
+          70
+        ],
+        "high": [
+          60,
+          100,
+          100
+        ]
+      }
+    },
+    "riesgo_alto": {
+      "rango": [
+        0,
+        100
+      ],
+      "funciones_membresia": {
+        "low": [
+          0,
+          0,
+          50
+        ],
+        "medium": [
+          30,
+          50,
+          70
+        ],
+        "high": [
+          60,
+          100,
+          100
+        ]
+      }
+    }
+  },
+  "rules": [
+    {
+      "if": {
+        "ingresos": "bajos",
+        "historial_pagos": "malo",
+        "deuda_relativa": "alta"
+      },
+      "then": {
+        "riesgo_alto": "high"
+      },
+      "weight": 0.9
+    },
+    {
+      "if": {
+        "ingresos": "bajos",
+        "deuda_relativa": "alta"
+      },
+      "then": {
+        "riesgo_alto": "high"
+      },
+      "weight": 0.7
+    },
+    {
+      "if": {
+        "deuda_relativa": "alta",
+        "historial_pagos": "malo"
+      },
+      "then": {
+        "riesgo_alto": "high"
+      },
+      "weight": 0.6
+    },
+    {
+      "if": {
+        "ingresos": "bajos",
+        "historial_pagos": "regular",
+        "deuda_relativa": "alta"
+      },
+      "then": {
+        "riesgo_alto": "medium"
+      },
+      "weight": 0.5
+    },
+    {
+      "if": {
+        "deuda_relativa": "alta",
+        "historial_pagos": "regular"
+      },
+      "then": {
+        "riesgo_alto": "medium"
+      },
+      "weight": 0.4
+    },
+    {
+      "if": {
+        "ingresos": "altos",
+        "historial_pagos": "bueno",
+        "deuda_relativa": "baja"
+      },
+      "then": {
+        "riesgo_bajo": "high"
+      },
+      "weight": 0.9
+    },
+    {
+      "if": {
+        "ingresos": "altos",
+        "historial_pagos": "bueno"
+      },
+      "then": {
+        "riesgo_bajo": "high"
+      },
+      "weight": 0.7
+    },
+    {
+      "if": {
+        "ingresos": "altos",
+        "deuda_relativa": "baja"
+      },
+      "then": {
+        "riesgo_bajo": "medium"
+      },
+      "weight": 0.6
+    },
+    {
+      "if": {
+        "historial_pagos": "bueno",
+        "deuda_relativa": "baja"
+      },
+      "then": {
+        "riesgo_bajo": "medium"
+      },
+      "weight": 0.5
+    },
+    {
+      "if": {
+        "ingresos": "medios",
+        "historial_pagos": "bueno",
+        "deuda_relativa": "baja"
+      },
+      "then": {
+        "riesgo_bajo": "medium"
+      },
+      "weight": 0.4
+    },
+    {
+      "if": {
+        "ingresos": "altos",
+        "historial_pagos": "regular",
+        "deuda_relativa": "baja"
+      },
+      "then": {
+        "riesgo_bajo": "low"
+      },
+      "weight": 0.3
+    },
+    {
+      "if": {
+        "ingresos": "medios",
+        "historial_pagos": "regular",
+        "deuda_relativa": "media"
+      },
+      "then": {
+        "riesgo_medio": "high"
+      },
+      "weight": 0.8
+    },
+    {
+      "if": {
+        "ingresos": "medios",
+        "deuda_relativa": "media"
+      },
+      "then": {
+        "riesgo_medio": "high"
+      },
+      "weight": 0.6
+    },
+    {
+      "if": {
+        "historial_pagos": "regular",
+        "deuda_relativa": "media"
+      },
+      "then": {
+        "riesgo_medio": "high"
+      },
+      "weight": 0.5
+    },
+    {
+      "if": {
+        "ingresos": "medios",
+        "historial_pagos": "malo"
+      },
+      "then": {
+        "riesgo_medio": "medium"
+      },
+      "weight": 0.4
+    },
+    {
+      "if": {
+        "ingresos": "bajos",
+        "deuda_relativa": "media"
+      },
+      "then": {
+        "riesgo_medio": "medium"
+      },
+      "weight": 0.3
+    },
+    {
+      "if": {
+        "ingresos": "altos",
+        "historial_pagos": "regular",
+        "deuda_relativa": "media"
+      },
+      "then": {
+        "riesgo_medio": "low"
+      },
+      "weight": 0.2
+    },
+    {
+      "if": {
+        "ingresos": "medios",
+        "historial_pagos": "bueno",
+        "deuda_relativa": "media"
+      },
+      "then": {
+        "riesgo_medio": "low"
+      },
+      "weight": 0.1
+    }
+  ]
+}
